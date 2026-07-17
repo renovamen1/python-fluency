@@ -1,4 +1,4 @@
-# Syntax Drills Resources
+# Learning Resources
 
 This directory lists the resources I used to learn Python concepts.
 
