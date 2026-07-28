@@ -43,4 +43,31 @@ def fact_recursion(n):
     else:
         return n * fact_recursion(n-1)
 
-print(fact_recursion(6))
+# print(fact_recursion(6)) 
+
+
+# practice set 
+# waf to calculate sum of first n natural numbers.
+# never forget to have the base case first in recursion problems.
+def sum_natural_numbers(num):
+    if (num == 0):
+        return 0 
+    return sum_natural_numbers(num -1) + num
+
+# print(sum_natural_numbers(4)) # output - 10
+
+#write a recursive fn  to print all the elements of a list.
+def display1(list):
+    for i in range(len(list)):
+        print(list[i], end = "-")
+
+# display1(list_1) #this is without using recursion.
+
+list_2 = [10,20,30]
+def display(list,index=0):
+    if index == len(list):
+        return 
+    print(list[index],end=' ') # or we can use return/ print there 
+    display(list,index + 1 )
+    print('a9')
+display(list_2) #this is with recursion
