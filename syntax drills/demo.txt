@@ -1,0 +1,3 @@
+this text is first line.
+this one is the second.
+while this one is the last sentence.this is fundamental step to add content without overwriting them. becareful where your pointer is at.
