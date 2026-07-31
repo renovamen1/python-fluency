@@ -1,1 +1,1 @@
-yes,this text is overwritten as a result of using w mode v2
+this is a test for write operation using with syntax
