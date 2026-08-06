@@ -81,6 +81,10 @@ class Students:
     def __init__(self,name,marks):
         self.name = name 
         self.marks = marks
+    @staticmethod # this is called decorator in python
+    def hello():
+        print("this is a example of static method,used when we dont require to reference self in the function")#@staticfunction is used to wrap the functiona and avoid error.
+
     def avg_marks(self):
         sum = 0
         for itr in self.marks:
@@ -90,6 +94,6 @@ class Students:
 
 S1 = Students("Peter Parker",[89,78,91])
 
-# S1.name = "Spiderman"
+# S1.name = "Spiderman" # we can also overwrite the value of exisitng obj attribute
 print("hello",S1.name,"your average score is",S1.avg_marks())
 
