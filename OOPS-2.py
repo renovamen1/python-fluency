@@ -2,7 +2,7 @@
 # (abstraction,encapsulation,inheritance,polymorphism)
 
 
-# hiding the implemntation details of a class and only showing the essential features to the user.
+# ABSTRACTION - hiding the implementation details of a class and only showing the essential features to the user.
 # here is a implementation of abstraction as a concept of Gun 
 
 class Gun:
@@ -88,3 +88,76 @@ google_1 = Google_acc("prab1n@gmail.com","abcd123")
 # to fix it, we simply make the attribute private by putting (__) 2 underscores infront of attribute name 
 # google_1.reset_pass("changed_pass123") # we can still call & view the password becuase private means it cannot be accessed outside classs but we can infer and call within the class
 # google_1.__pvt_method() # yup, this works. method of object(google_1) is set to private and only can be acccessed with in the class
+
+
+# INHERITANCE -- WHEN ONE CLASS DERIVES THE PROPERTIES AND METHODS OF ANOTHER CLASS
+# here is an implementation of inheritance as a concept of an anime
+class Animation:
+    def __init__(self,style):
+        self.style = style
+
+    def origin(self):
+        print("japan")
+
+class Ghibli(Animation):         #super method is used to access methods of the parent class
+    def __init__(self,style_1,genre):
+        super().__init__(style_1) # Passes 'style' up to Animation.__init__()
+        self.genre = genre
+    @staticmethod
+    def studio():
+        print("Ghibli studios inc")
+#until now this is a single level inheritance, (Ghibli) is a derived class of a single class(Animation)
+# below it and as we derive classes one upon another, we perform multi-level inheritance
+
+
+# f1 = Ghibli("melo movie","minimalistic")
+# print(f1.type)
+'''
+When we define def __init__() in GhibliMovie, it overrides the parent __init__ methods. 
+If we don't call super().__init__(), the code inside Animation.__init__ and Ghibli.__init__ never runs,
+meaning self.style and self.type  never gets created on our object.
+'''
+
+class ghibli_movie(Ghibli):
+    def __init__(self,name,released_year,duration,style,genre):
+        super().__init__(style,genre)
+        self.name = name 
+        self.released_year = released_year
+        self.duration = duration
+        
+
+top_ghibli = ghibli_movie("spirited away","1992","140 minutes","hand drawn","romance")
+# print(top_ghibli.name,top_ghibli.released_year,top_ghibli.duration,top_ghibli.style,top_ghibli.genre)
+# top_ghibli.studio()
+# top_ghibli.origin()
+
+
+
+# we also have multiple inheritance , inherting charcteristics from multiple class
+class A:
+    def __init__(self):
+        self.message = "this is class A"
+        print(self.message,"hello")
+    @staticmethod
+    def test():
+        print("this is a test")
+
+class B:
+    def __init__(self):
+        self.text = "this is class B"
+        print(self.text,"namaste")
+
+class C(A,B):
+    def __init__(self):
+        A.__init__(self) # this is way to inherit properties by explicit Parent Class Calling
+        B.__init__(self) 
+#next approach of multiple inheritance invloves making a single super().__init__() inside C & initializing both A and B,
+#we must add super().__init__() inside A and B as well.
+#Python uses the Method Resolution Order (MRO) to chain these calls (C → A → B → object).
+        
+        
+c1 = C()
+print(c1.message)
+print(c1.text)
+c1.test()
+
