@@ -5,6 +5,9 @@
 # ABSTRACTION - hiding the implementation details of a class and only showing the essential features to the user.
 # here is a implementation of abstraction as a concept of Gun 
 
+from bdb import checkfuncname
+
+
 class Gun:
     def __init__(self):
         self.bullet_loaded = False
@@ -156,8 +159,56 @@ class C(A,B):
 #Python uses the Method Resolution Order (MRO) to chain these calls (C → A → B → object).
         
         
-c1 = C()
-print(c1.message)
-print(c1.text)
-c1.test()
+# c1 = C()
+# print(c1.message)
+# print(c1.text)
+# c1.test()
 
+
+#decorators in python 
+#just like we had @staticmethod to make methods which dont require 'self' as an argument and it cannot
+#and dont need to access  or change instance and class attributes.
+
+#we have class method which takes cls as an implicit first argument(doesnt take self as an argunent)
+#and we have that normal kind (instance class) which takes self as an argument 
+
+class food:
+    lunch = "Fried rice"
+    def __init__(self,lunch):
+        # self.__class__.lunch = "pizza" #this is one way to change the class attribute and other way is by creating method under @classmethod
+        # self.lunch = lunch #this creates a local instance attribute with in the scope of __init__ , this doesnt update the class attribute "lunch" which is set to "fried rice"
+        print(f"{lunch} is ready for lunch")
+    @classmethod #@classmethod can be used to change the class attribute (lunch) in this case
+    def drinks(cls,meal,drink):
+        cls.lunch = meal
+        print(f"we will be eating {cls.lunch} with {drink} for breakfast.")
+
+# f1 = food("tortilla")
+# f1.drinks("bread","lemon tea")
+
+# PROPERTY DECORATOR
+# We use @property decorator on any method in the class to use the method as a property.
+
+class Student_A:
+    def __init__(self,phy,chem,math):
+        self.phy = phy
+        self.chem = chem
+        self.math = math
+        # self.percentage = str((self.phy + self.chem + self.math)/3) + "%" 
+        # if we had done only this, self.percentage doesnt reflect change when a mark of a certian subject is changed later(e.g when maths marks was changed)
+
+    # def calcPercentage1(self): #just a normal method,& we could have done it this way
+    #     self.percentage = str((self.phy + self.chem+ self.math)/3) + "%"
+    #     return self.percentage
+
+    @property
+    def Percentage(self): #the @property decorator converts this method as a property or an attribute 
+        self.percentage = str((self.phy + self.chem+ self.math)/3) + "%"
+        return self.percentage
+# if a value of a attribute is dependent upon a function, then we convert the function/method itself as a property so the changes are reflected instantly.
+# here we are using @property decorator to make the calcPercentage method as a property 
+std1 = Student_A(89,78,92)
+std1.math = 56
+# print(std1.calcPercentage())
+
+print(std1.Percentage)
