@@ -208,7 +208,61 @@ class Student_A:
 # if a value of a attribute is dependent upon a function, then we convert the function/method itself as a property so the changes are reflected instantly.
 # here we are using @property decorator to make the calcPercentage method as a property 
 std1 = Student_A(89,78,92)
+# print(std1.Percentage)
 std1.math = 56
 # print(std1.calcPercentage())
+# print(std1.Percentage) #this is percentage after a subject marks is chnaged
 
-print(std1.Percentage)
+# POLYMORPHISM
+# when the same operator is allowed to have different meaning according to the context
+# Operator Overloading is the primary example of polymorphism in python
+# complex numbers is not a a builtin type(class) in python, so we would create class for complex no to understand polymorphism
+
+# functions with double underscores(__fn) infront of the name are called dunder functions
+# we use dunder functions to define what a particular methodo or character does for us . eg - we can set what '+'sign  does in complex numbers 
+class complex:
+    def __init__(self,real,img):
+        self.real = real
+        self.img = img
+    def show(self):
+        print(self.real ,"i + ",self.img,"j")
+    def add(self,num2):    
+        newREAL = self.real + num2.real
+        newIMG = self.img + num2.img
+        # print(newREAL,"i +",newIMG,"j") # we can do this or return a new complex number
+        return complex(newREAL,newIMG)
+
+c_num1 = complex(3,4)
+# c_num1.show()
+c_num2 = complex(5,7)
+# c_num2.show()
+c_num3 = c_num1.add(c_num2) # this approach requires us to call a function attached to a class's method
+
+# c_num3.show()
+
+# but we can directly add two complex numbers or in the broader sense make use
+#  of our operators(+,-,*,=,etc) based on our context
+#  and requirement using dunder functions
+
+# here is the example utilizing dunder functions for same complex number case
+class complex_no:
+    def __init__(self,real,img):
+        self.real = real
+        self.img = img
+    def show(self):
+        print(self.real ,"i + ",self.img,"j")
+    def __add__(self,num2):  # __add__ is the dunder fn for operator"+". now we can determine what '+' does for objects in this class
+        newREAL = self.real + num2.real
+        newIMG = self.img + num2.img
+        return complex(newREAL,newIMG)
+
+
+
+c_num1 = complex_no(3,4)
+# c_num1.show()
+c_num2 = complex_no(5,7)
+# c_num2.show()
+# c_num3 = c_num1.add(c_num2) 
+# the above step could be easily done now uisng : c_num3 =  c_num1 + c_num2
+c_num3 = c_num1 + c_num2
+c_num3.show()
