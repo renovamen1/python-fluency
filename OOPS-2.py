@@ -6,6 +6,7 @@
 # here is a implementation of abstraction as a concept of Gun 
 
 from bdb import checkfuncname
+from operator import itemgetter
 
 
 class Gun:
@@ -265,4 +266,79 @@ c_num2 = complex_no(5,7)
 # c_num3 = c_num1.add(c_num2) 
 # the above step could be easily done now uisng : c_num3 =  c_num1 + c_num2
 c_num3 = c_num1 + c_num2
-c_num3.show()
+# c_num3.show()
+
+
+# there are other dunder functions for other operators  you can check out if 
+# you want to apply operator overlaoding as they seem fit for ur usecases.
+
+
+#PRACTICE QUES:
+#1.DEFINE A CIRCLE CLASS TO CREATE A CIRCLE WITH RADIUS R  USING THE CONSTRUCTOR
+    #define an area method of the class which calculates the area of circle.
+    #define a perimeter method of the class which calculaets the perimeter of a circle
+
+class circle:
+    def __init__(self,radius):
+        self.radius = radius
+        self.pie = 3.145
+    def area(self):
+        print(f"area of circle with radius {self.radius} is ",f"{self.pie*self.radius ** 2:.2f}" ,"units")
+    def perimeter(self):
+        print(f"the perimeter of circle with radius {self.radius} is ",f"{2*self.pie* self.radius:.2f}","units")
+
+c1 = circle(7)
+# c1.area()
+# c1.perimeter()
+        
+
+# DEFINE AN EMPLOYEE CLASS WITH ATTRIBUTES ROLE,DEPARTMENT AND SALARY.
+# this class also has a showDetails() method
+#create an engineer class that inherits properties from employee and has additional attributes name and age
+
+
+class Employee:
+    def __init__(self,role,dept,salary):
+        self.role = role
+        self.dept = dept
+        self.salary = salary
+    def showDetails(self):
+        print("Role: ",self.role)
+        print("Department: ",self.dept)
+        print("Salary: ",self.salary)
+    def temp(self):
+        print("hello stan")
+
+emp1 = Employee("manager","marketing","Rs.50000")
+# emp1.showDetails()
+
+class Engineer(Employee):
+    def __init__(self,role,dept,salary,name,age):
+        super().__init__(role,dept,salary)
+        # super().__init__('engineer',"IT","$4000000") # we could have use this, if suppose the role,dept and salary were constatnt for an engineer. we also dont require to pass argumnents for role,dept and salary if that was the case 
+        self.name = name
+        self.age = age 
+
+eng1 = Engineer("Data scientist","Engineering","$7000000","prabin",21)
+# print(eng1.name)
+# eng1.showDetails()
+# print(eng1.name)
+# print(eng1.age)
+
+#CREATE A CLASS CALLED ORDER WHICH  STORES ITEMS AND ITS PRICE
+# use dunder fns __gt__ to convey that: order1 > order2 if price of order1 > price of order2
+
+class Order:
+    def __init__(self,item,price):
+        self.item = item
+        self.price = price
+
+    def __gt__(self,order2):
+        if (self.price > order2.price):
+            print(True)
+        else:
+            print(False)
+
+purchase1 = Order("momo",150)
+purchase2 = Order("chowmin",200)
+purchase1 > purchase2
